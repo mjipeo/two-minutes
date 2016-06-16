@@ -3,3 +3,12 @@ $padding: 20px;
 body {
   padding: $padding;
 }
+
+#two-minutes {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 100px;
+  height: 100px;
+  background-color: rgba(255, 0, 0, 0.5);
+}
