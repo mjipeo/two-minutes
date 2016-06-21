@@ -13,8 +13,10 @@ $color-quaternary: #d1d1d1 !default;
 
 #two-minutes {
   position: fixed;
-  top: 20px;
-  right: 20px;
+  /*top: 20px;*/
+  /*right: 20px;*/
+  left: 20px;
+  bottom: 20px;
   width: 100px;
   box-sizing: border-box;
   border-radius: 8px;
@@ -114,15 +116,23 @@ $color-quaternary: #d1d1d1 !default;
   left: 0;
   background-color: rgba($color-primary, .85);
   z-index: 19850403;
-  -webkit-animation: fadeinout .5s ease-in forwards;
-  animation: fadeinout .5s ease-in forwards;
+  h1 {
+    color: white;
+    font-size: 100px;
+    text-align: center;
+    margin-top: 400px;
+  }
+  -webkit-animation: fadeinout 1s ease-in forwards;
+  animation: fadeinout 1s ease-in forwards;
   opacity: 0;
 }
 
 @-webkit-keyframes fadeinout {
   50% { opacity: 1; }
+  /*100% { opacity: 1; }*/
 }
 
 @keyframes fadeinout {
   50% { opacity: 1; }
+  /*100% { opacity: 1; }*/
 }

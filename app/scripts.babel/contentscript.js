@@ -93,10 +93,11 @@ class Timer {
 
     let div = document.createElement('div');
     div.setAttribute('id', 'two-minutes-flash');
+    //div.innerHTML = '<h1>Timer Done</h1>';
     document.body.appendChild(div);
-    setTimeout(function () {
-      div.parentNode.removeChild(div);
-    }, 1000);
+    //setTimeout(function () {
+      //div.parentNode.removeChild(div);
+    //}, 1000);
 
     // FIXME: Alert
     /*
