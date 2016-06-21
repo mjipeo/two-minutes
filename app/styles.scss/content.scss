@@ -5,33 +5,104 @@
   transition:         $transition;
 }
 
+$color-initial: #fff !default;
+$color-primary: lighten(#9b4dca, 10%) !default;
+$color-secondary: #606c76 !default;
+$color-tertiary: #f4f5f6 !default;
+$color-quaternary: #d1d1d1 !default;
+
 #two-minutes {
   position: fixed;
   top: 20px;
   right: 20px;
   width: 100px;
   box-sizing: border-box;
-  height: 100px;
+  border-radius: 8px;
+  /*height: 100px;*/
   color: white;
-  background-color: #666;
+  background-color: rgba(60, 60, 60, 1);
   z-index: 1000000;
   text-align: center;
   padding: 10px;
-  @include transition(background-color .5s);
+  @include transition(all .3s);
   font-family: 'Courier New';
-  &.active {
-    background-color: #000;
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, .2);
   }
-  .sub {
+  &.active {
+    background-color: rgba(60, 60, 60, .85);
+  }
+  .two-minutes-sub {
     min-height: 16px;
+    height: 16px;
     margin-bottom: 5px;
     color: #999;
     font-size: 12px;
+    font-family: 'Courier New';
   }
-  .main {
+  .two-minutes-main {
+    color: white;
     font-size: 25px;
     font-weight: bold;
     margin-bottom: 5px;
+    font-family: 'Courier New';
+  }
+  .button {
+    background-color: $color-primary;
+    border: 1px solid $color-primary;
+    border-radius: 5px;
+    color: $color-initial;
+    cursor: pointer;
+    display: block;
+    width: 100%;
+    font-size: 12px;
+    font-weight: 700;
+    height: 30px;
+    letter-spacing: .1rem;
+    line-height: 30px;
+    padding: 0 10px;
+    text-align: center;
+    text-decoration: none;
+    text-transform: uppercase;
+    white-space: nowrap;
+
+    &:hover,
+    &:focus {
+      background-color: $color-secondary;
+      border-color: $color-secondary;
+      color: $color-initial;
+      outline: 0;
+    }
+
+    &.button-disabled,
+    &[disabled] {
+      opacity: .5;
+      cursor: default;
+      &:hover,
+      &:focus {
+        background-color: $color-primary;
+        border-color: $color-primary;
+      }
+    }
+    &.button-outline {
+      color: $color-primary;
+      background-color: transparent;
+      &:hover,
+      &:focus {
+        color: $color-secondary;
+        background-color: transparent;
+        border-color: $color-secondary;
+      }
+      &.button-disabled,
+      &[disabled] {
+        &:hover,
+        &:focus {
+          color: $color-primary;
+          border-color: inherit;
+        }
+      }
+    }
   }
 }
 
@@ -41,8 +112,8 @@
   right: 0;
   bottom: 0;
   left: 0;
-  background-color: rgba(255, 0, 0, 0.5);
-  z-index: 1000001;
+  background-color: rgba($color-primary, .85);
+  z-index: 19850403;
   -webkit-animation: fadeinout .5s ease-in forwards;
   animation: fadeinout .5s ease-in forwards;
   opacity: 0;

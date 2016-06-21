@@ -25,13 +25,13 @@ class Timer {
     this.remaining = null;
   }
   getSubEl() {
-    return this.el.querySelector('.sub');
+    return this.el.querySelector('.two-minutes-sub');
   }
   getMainEl() {
-    return this.el.querySelector('.main');
+    return this.el.querySelector('.two-minutes-main');
   }
   getButtonEl() {
-    return this.el.querySelector('button');
+    return this.el.querySelector('.button');
   }
   addEventListeners() {
     this.el.addEventListener('keyup', this.onKeyup.bind(this));
@@ -42,7 +42,7 @@ class Timer {
     if (e.keyCode == 13) {
       this.toggle();
     }
-    if (e.keyCode >= '0'.charCodeAt(0) && e.keyCode <= '9'.charCodeAt(0)) {
+    if (!this.active && isDigit(e.keyCode)) {
       if (!this.keyTyped) {
         this.main = '0000';
         this.keyTyped = true;
@@ -89,7 +89,15 @@ class Timer {
     this.render();
   }
   end() {
-    clearInterval(this.interval);
+    this.stop();
+
+    let div = document.createElement('div');
+    div.setAttribute('id', 'two-minutes-flash');
+    document.body.appendChild(div);
+    setTimeout(function () {
+      div.parentNode.removeChild(div);
+    }, 1000);
+
     // FIXME: Alert
     /*
     let div = document.createElement('div');
@@ -109,9 +117,9 @@ class Timer {
     this.el.setAttribute('id', 'two-minutes');
     this.el.setAttribute('tabindex', '0');
     this.el.innerHTML = `
-      <div class="sub"></div>
-      <div class="main"></div>
-      <button type="button" class="">Start</button>
+      <div class="two-minutes-sub"></div>
+      <div class="two-minutes-main"></div>
+      <button type="button" class="button button-outline">Start</button>
     `;
 
     this.addEventListeners();
@@ -172,6 +180,10 @@ function just(number) {
   } else {
     return '0' + number;
   }
+}
+
+function isDigit(keyCode) {
+  return keyCode >= '0'.charCodeAt(0) && keyCode <= '9'.charCodeAt(0);
 }
 
 
