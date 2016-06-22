@@ -2,17 +2,6 @@
 
 console.log('\'Allo \'Allo! Content script');
 
-chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) {
-  console.log(sender.tab ?
-              'from a content script:' + sender.tab.url :
-              'from the extension');
-  activate();
-
-  if (request.greeting == 'hello') {
-    sendResponse({farewell: 'goodbye'});
-  }
-});
-
 class Timer {
   constructor(el) {
     this.el = el;
@@ -31,7 +20,7 @@ class Timer {
     return this.el.querySelector('.two-minutes-main');
   }
   getButtonEl() {
-    return this.el.querySelector('.button');
+    return this.el.querySelector('.two-minutes-button');
   }
   addEventListeners() {
     this.el.addEventListener('keyup', this.onKeyup.bind(this));
@@ -120,7 +109,7 @@ class Timer {
     this.el.innerHTML = `
       <div class="two-minutes-sub"></div>
       <div class="two-minutes-main"></div>
-      <button type="button" class="button button-outline">Start</button>
+      <button type="button" class="two-minutes-button two-minutes-button-outline">Start</button>
     `;
 
     this.addEventListeners();
@@ -128,14 +117,12 @@ class Timer {
     this.el.focus();
 
     this.render();
+
+    return this;
   }
-}
-
-{
-  const div = document.createElement('div');
-  document.body.appendChild(div);
-
-  (new Timer(div)).initialize();
+  terminate() {
+    this.el.parentNode.removeChild(this.el);
+  }
 }
 
 function toggleClass(el, className) {
@@ -187,83 +174,41 @@ function isDigit(keyCode) {
   return keyCode >= '0'.charCodeAt(0) && keyCode <= '9'.charCodeAt(0);
 }
 
+{
+  let timer = null;
 
-/*
-let sub = '';
-let target = '0200';
-let div = null;
-let keyTyped = false;
-
-function redraw() {
-  console.log('redrawing');
-  div.querySelector('.sub').innerHTML = timize(sub);
-  div.querySelector('.main').innerHTML = timize(target);
-}
-
-function start() {
-  sub = target;
-
-  toggleClass(div, 'active');
-
-  let remaining = parse(target);
-  setInterval(() => {
-    console.log(remaining);
-
-    remaining -= 1;
-    target = unparse(remaining);
-    redraw();
-
-    if (!remaining) {
-      end();
-    }
-  }, 1000);
-
-  redraw();
-}
-
-function end() {
-  let div = document.createElement('div');
-  div.setAttribute('id', 'two-minutes-flash');
-  document.body.appendChild(div);
-  setTimeout(function () {
-    div.parentNode.removeChild(div);
-  }, 1000);
-}
-
-function activate() {
-  return;
-  div = document.createElement('div');
-  div.setAttribute('id', 'two-minutes');
-  div.setAttribute('tabindex', '0');
-  div.innerHTML = `
-  <div class="sub"></div>
-  <div class="main"></div>
-  `;
-  div.addEventListener('keyup', (e) => {
-    console.log(e.keyCode);
-
-    if (e.keyCode == 13) {
-      start();
-      //end();
-    }
-    if (e.keyCode >= '0'.charCodeAt(0) && e.keyCode <= '9'.charCodeAt(0)) {
-      if (!keyTyped) {
-        target = '0000';
-        keyTyped = true;
+  chrome.runtime.onMessage.addListener(request => {
+    switch (request.command) {
+      case 'toggle-two-minutes': {
+        toggleTimer();
+        break;
       }
-      target += (e.keyCode - '0'.charCodeAt(0));
-      target = target.substring(1);
-      redraw();
+      case 'toggle-two-minutes-timer': {
+        getOrCreateTimer().toggle();
+        break;
+      }
     }
   });
-  div.addEventListener('click', (e) => {
-    div.focus();
-  });
-  document.body.appendChild(div);
-  div.focus();
-  redraw();
 
+  function toggleTimer() {
+    if (timer) {
+      timer.terminate();
+      timer = null;
+    } else {
+      getOrCreateTimer();
+    }
+  }
+
+  function getOrCreateTimer() {
+    if (!timer) {
+      timer = createTimer();
+    }
+    return timer;
+  }
+
+  function createTimer() {
+    const div = document.createElement('div');
+    document.body.appendChild(div);
+    return (new Timer(div)).initialize();
+  }
 }
-
-activate();  // FIXME
-*/
