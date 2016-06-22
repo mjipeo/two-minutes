@@ -190,6 +190,12 @@ function isDigit(keyCode) {
     }
   });
 
+  chrome.storage.sync.get(null, vault => {
+    if (vault.burning) {
+      getOrCreateTimer().toggle();
+    }
+  });
+
   function toggleTimer() {
     if (timer) {
       timer.terminate();
