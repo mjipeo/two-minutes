@@ -114,7 +114,7 @@ class Timer {
     this.getMainEl().textContent = timize(this.main);
     this.getButtonEl().textContent = this.active ? 'Stop' : 'Start';
   }
-  run() {
+  initialize() {
     this.el.setAttribute('id', 'two-minutes');
     this.el.setAttribute('tabindex', '0');
     this.el.innerHTML = `
@@ -135,7 +135,7 @@ class Timer {
   const div = document.createElement('div');
   document.body.appendChild(div);
 
-  (new Timer(div)).run();
+  (new Timer(div)).initialize();
 }
 
 function toggleClass(el, className) {

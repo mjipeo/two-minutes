@@ -16,6 +16,7 @@
   },
   "permissions": [
     "tabs",
+    "storage",
     "http://*/*",
     "https://*/*",
     "background"
@@ -51,10 +52,17 @@
   "commands": {
     "toggle-two-minutes": {
       "suggested_key": {
-        "default": "Ctrl+Shift+M",
-        "mac": "Command+MacCtrl+M"
+        "default": "Ctrl+Shift+J",
+        "mac": "Command+MacCtrl+J"
       },
-      "description": "Toggle two minutes"
+      "description": "Toggle Two minutes"
+    },
+    "toggle-two-minutes-timer": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+K",
+        "mac": "Command+MacCtrl+K"
+      },
+      "description": "Toggle Two minutes timer"
     }
   }
 }
