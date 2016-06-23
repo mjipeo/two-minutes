@@ -42,7 +42,7 @@ class Timer {
     }
   }
   onClick(e) {
-    this.el.focus();
+    this.focus();
   }
   onTick() {
     this.remaining -= 1;
@@ -102,6 +102,11 @@ class Timer {
     this.getSubEl().textContent = timize(this.sub);
     this.getMainEl().textContent = timize(this.main);
     this.getButtonEl().textContent = this.active ? 'Stop' : 'Start';
+    return this;
+  }
+  focus() {
+    this.el.focus();
+    return this;
   }
   initialize() {
     this.el.setAttribute('id', 'two-minutes');
@@ -114,7 +119,7 @@ class Timer {
 
     this.addEventListeners();
 
-    this.el.focus();
+    this.focus();
 
     this.render();
 
@@ -122,7 +127,10 @@ class Timer {
   }
   terminate() {
     clearInterval(this.interval);
+
     this.el.parentNode.removeChild(this.el);
+
+    return this;
   }
 }
 
@@ -185,7 +193,7 @@ function isDigit(keyCode) {
         break;
       }
       case 'toggle-two-minutes-timer': {
-        getOrCreateTimer().toggle();
+        getOrCreateTimer().toggle().focus();
         break;
       }
     }
