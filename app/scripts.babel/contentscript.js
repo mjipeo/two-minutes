@@ -121,6 +121,7 @@ class Timer {
     return this;
   }
   terminate() {
+    clearInterval(this.interval);
     this.el.parentNode.removeChild(this.el);
   }
 }
