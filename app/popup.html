@@ -11,12 +11,28 @@
     <!-- endbuild -->
   </head>
   <body>
-    <!--<h1>'Allo, 'Allo!</h1>-->
-
-    <label>
-      <input type="checkbox" name="burning">
-      Burning Mode
-    </label>
+    <div class="two-minutes-popup">
+      <label>
+        <input type="checkbox" name="burning">
+        Burning Mode
+      </label>
+      <div class="help-text">
+        If activated, the timer will be automatically set and run whenever a new page is opened.
+      </div>
+      <hr>
+      <div class="help-text">
+        <h5>Keyboard Shortcuts</h5>
+        <div>
+          <strong>⌘^B</strong>: Toggle burning mode
+        </div>
+        <div>
+          <strong>⌘^N</strong>: Show/hide timer in current page
+        </div>
+        <div>
+          <strong>⌘^M</strong>: Start/stop timer in current page
+        </div>
+      </div>
+    </div>
 
     <!-- build:js scripts/popup-vendor.js -->
     <!-- bower:js -->

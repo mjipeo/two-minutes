@@ -1,8 +1,8 @@
 'use strict';
 
-console.log('\'Allo \'Allo! Popup');
-
 {
+  let checkbox;
+
   if (document.readyState != 'loading'){
     onReady();
   } else {
@@ -10,14 +10,22 @@ console.log('\'Allo \'Allo! Popup');
   }
 
   function onReady() {
-    const checkbox = document.querySelector('input[name="burning"]');
+    checkbox = document.querySelector('input[name="burning"]');
 
     checkbox.addEventListener('click', e => {
       chrome.storage.sync.set({'burning': checkbox.checked});
+      refreshBadge();
     });
 
     chrome.storage.sync.get(null, vault => {
       checkbox.checked = !!vault.burning;
+      refreshBadge();
+    });
+  }
+
+  function refreshBadge() {
+    chrome.browserAction.setBadgeText({
+      text: checkbox.checked ? 'on' : ''
     });
   }
 }

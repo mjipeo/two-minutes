@@ -81,7 +81,7 @@ class Timer {
     this.stop();
 
     let div = document.createElement('div');
-    div.setAttribute('id', 'two-minutes-flash');
+    addClass(div, 'two-minutes-flash');
     //div.innerHTML = '<h1>Timer Done</h1>';
     document.body.appendChild(div);
     setTimeout(function () {
@@ -109,12 +109,12 @@ class Timer {
     return this;
   }
   initialize() {
-    this.el.setAttribute('id', 'two-minutes');
+    addClass(this.el, 'two-minutes');
     this.el.setAttribute('tabindex', '0');
     this.el.innerHTML = `
       <div class="two-minutes-sub"></div>
       <div class="two-minutes-main"></div>
-      <button type="button" class="two-minutes-button two-minutes-button-outline">Start</button>
+      <div class="two-minutes-button two-minutes-button-outline">Start</div>
     `;
 
     this.addEventListeners();
@@ -134,6 +134,9 @@ class Timer {
   }
 }
 
+// Utility
+// =======
+
 function toggleClass(el, className) {
   if (el.classList) {
     el.classList.toggle(className);
@@ -147,6 +150,14 @@ function toggleClass(el, className) {
       classes.push(className);
 
     el.className = classes.join(' ');
+  }
+}
+
+function addClass(el, className) {
+  if (el.classList) {
+    el.classList.add(className);
+  } else {
+    el.className += ' ' + className;
   }
 }
 
@@ -182,6 +193,9 @@ function just(number) {
 function isDigit(keyCode) {
   return keyCode >= '0'.charCodeAt(0) && keyCode <= '9'.charCodeAt(0);
 }
+
+// Main logic
+// ==========
 
 {
   let timer = null;

@@ -4,7 +4,7 @@ chrome.runtime.onInstalled.addListener(details => {
   console.log('previousVersion', details.previousVersion);
 });
 
-chrome.browserAction.setBadgeText({text: '2s'});
+//chrome.browserAction.setBadgeText({text: '2s'});
 
 chrome.commands.onCommand.addListener(command => {
   //console.log(command);

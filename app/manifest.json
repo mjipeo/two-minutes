@@ -52,15 +52,15 @@
   "commands": {
     "toggle-two-minutes": {
       "suggested_key": {
-        "default": "Ctrl+Shift+J",
-        "mac": "Command+MacCtrl+J"
+        "default": "Ctrl+Shift+N",
+        "mac": "Command+MacCtrl+N"
       },
       "description": "Toggle Two minutes"
     },
     "toggle-two-minutes-timer": {
       "suggested_key": {
-        "default": "Ctrl+Shift+K",
-        "mac": "Command+MacCtrl+K"
+        "default": "Ctrl+Shift+M",
+        "mac": "Command+MacCtrl+M"
       },
       "description": "Toggle Two minutes timer"
     }

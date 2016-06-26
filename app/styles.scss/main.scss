@@ -1,14 +1,33 @@
-$padding: 20px;
-
 body {
-  padding: $padding;
+  padding: 10px;
+  font-size: 14px;
 }
 
-#two-minutes {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  width: 100px;
-  height: 100px;
-  background-color: rgba(255, 0, 0, 0.5);
+.two-minutes-popup {
+  min-width: 250px;
+
+  label {
+    cursor: pointer;
+  }
+
+  hr {
+    border: none;
+    border-top: 1px solid #eee;
+    margin: 15px auto;
+  }
+
+  h5 {
+    font-size: 12px;
+    margin: 0 0 5px;
+  }
+
+  strong {
+    font-family: 'Courier New';
+  }
+
+  .help-text {
+    font-size: 12px;
+    color: #999;
+    margin-top: 5px;
+  }
 }
