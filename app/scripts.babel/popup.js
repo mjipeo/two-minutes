@@ -14,18 +14,10 @@
 
     checkbox.addEventListener('click', e => {
       chrome.storage.sync.set({'burning': checkbox.checked});
-      refreshBadge();
     });
 
     chrome.storage.sync.get(null, vault => {
       checkbox.checked = !!vault.burning;
-      refreshBadge();
-    });
-  }
-
-  function refreshBadge() {
-    chrome.browserAction.setBadgeText({
-      text: checkbox.checked ? 'on' : ''
     });
   }
 }

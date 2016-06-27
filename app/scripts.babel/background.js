@@ -1,24 +1,37 @@
 'use strict';
 
-chrome.runtime.onInstalled.addListener(details => {
-  console.log('previousVersion', details.previousVersion);
-});
+{
+  chrome.commands.onCommand.addListener(command => {
+    if (command.startsWith('toggle-two-minutes')) {
+      chrome.tabs.query({active: true, currentWindow: true}, tabs => {
+        chrome.tabs.sendMessage(tabs[0].id, {command});
+      });
+    }
 
-//chrome.browserAction.setBadgeText({text: '2s'});
+    switch (command) {
+      case 'toggle-two-minutes-burning': {
+        chrome.storage.sync.get(null, vault => {
+          chrome.storage.sync.set({'burning': !vault.burning});
+        });
+        break;
+      }
+    }
 
-chrome.commands.onCommand.addListener(command => {
-  //console.log(command);
-  //return;
+  });
 
-  if (command.startsWith('toggle-two-minutes')) {
-    chrome.tabs.query({active: true, currentWindow: true}, tabs => {
-      chrome.tabs.sendMessage(tabs[0].id, {command});
+  chrome.storage.onChanged.addListener(onStorageChanged);
+
+  //chrome.commands.getAll(commands => {
+    //console.log(commands.map(command => command.shortcut));
+  //});
+
+  onStorageChanged();
+
+  function onStorageChanged(changes) {
+    chrome.storage.sync.get(null, vault => {
+      chrome.browserAction.setBadgeText({
+        text: vault.burning ? 'on' : ''
+      });
     });
   }
-});
-
-chrome.commands.getAll(commands => {
-  console.log(commands.map(command => command.shortcut));
-});
-
-console.log('\'Allo \'Allo! Event Page for Browser Action');
+}

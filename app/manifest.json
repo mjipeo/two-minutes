@@ -55,14 +55,21 @@
         "default": "Ctrl+Shift+N",
         "mac": "Command+MacCtrl+N"
       },
-      "description": "Toggle Two minutes"
+      "description": "Show/hide timer in current page"
     },
     "toggle-two-minutes-timer": {
       "suggested_key": {
         "default": "Ctrl+Shift+M",
         "mac": "Command+MacCtrl+M"
       },
-      "description": "Toggle Two minutes timer"
+      "description": "Start/stop timer in current page"
+    },
+    "toggle-two-minutes-burning": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "Command+MacCtrl+B"
+      },
+      "description": "Toggle burning mode"
     }
   }
 }
